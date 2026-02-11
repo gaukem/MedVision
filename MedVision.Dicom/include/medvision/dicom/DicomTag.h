@@ -45,6 +45,7 @@ namespace medvision
 			static const DicomTag SeriesInstanceUID;                 // (0020,000E)
 			static const DicomTag StudyDate;                         // (0008,0020)
 			static const DicomTag StudyTime;                         // (0008,0030)
+			static const DicomTag StudyDescription;                  // (0008,1030)
 			static const DicomTag Modality;                          // (0008,0060)
 
 			static const DicomTag Rows;                              // (0028,0010)
@@ -55,6 +56,10 @@ namespace medvision
 			static const DicomTag PixelRepresentation;               // (0028,0103)
 			static const DicomTag SamplesPerPixel;                   // (0028,0002)
 			static const DicomTag PhotometricInterpretation;         // (0028,0004)
+			static const DicomTag WindowCenter;                      // (0028,1050)
+			static const DicomTag WindowWidth;                       // (0028,1051)
+			static const DicomTag RescaleIntercept;                  // (0028,1052)
+			static const DicomTag RescaleSlope;                      // (0028,1053)
 			static const DicomTag PixelData;                         // (7FE0,0010)
 
 		private:

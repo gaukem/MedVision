@@ -26,6 +26,7 @@ namespace medvision
 		const DicomTag DicomTag::SeriesInstanceUID(0x0020, 0x000E);
 		const DicomTag DicomTag::StudyDate(0x0008, 0x0020);
 		const DicomTag DicomTag::StudyTime(0x0008, 0x0030);
+		const DicomTag DicomTag::StudyDescription(0x0008, 0x1030);
 		const DicomTag DicomTag::Modality(0x0008, 0x0060);
 
 		const DicomTag DicomTag::Rows(0x0028, 0x0010);
@@ -36,6 +37,10 @@ namespace medvision
 		const DicomTag DicomTag::PixelRepresentation(0x0028, 0x0103);
 		const DicomTag DicomTag::SamplesPerPixel(0x0028, 0x0002);
 		const DicomTag DicomTag::PhotometricInterpretation(0x0028, 0x0004);
+		const DicomTag DicomTag::WindowCenter(0x0028, 0x1050);
+		const DicomTag DicomTag::WindowWidth(0x0028, 0x1051);
+		const DicomTag DicomTag::RescaleIntercept(0x0028, 0x1052);
+		const DicomTag DicomTag::RescaleSlope(0x0028, 0x1053);
 		const DicomTag DicomTag::PixelData(0x7FE0, 0x0010);
 
 		DicomTag::DicomTag() : group_(0), element_(0)

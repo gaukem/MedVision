@@ -29,6 +29,12 @@ jobs:
         echo Building MedVision.Dicom.Tests
         msbuild "MedVision.Dicom.Tests\MedVision.Dicom.Tests.vcxproj" /p:Configuration=Release /p:Platform=x64 /m
 
+    - name: Build MedVision.Imaging (Release x64)
+      shell: cmd
+      run: |
+        echo Building MedVision.Imaging
+        msbuild "MedVision.Imaging\MedVision.Imaging.vcxproj" /p:Configuration=Release /p:Platform=x64 /m
+
     - name: Run unit tests with vstest
       shell: cmd
       run: |
@@ -47,3 +53,31 @@ jobs:
         name: test-results
         path: |
           **/*.trx
+
+    # TODO: Add build steps for MedVision.Imaging, MedVision.Rendering, MedVision.Viewer
+    # Uncomment below when projects are created:
+    #
+    # - name: Build MedVision.Imaging (Debug x64)
+    #   shell: cmd
+    #   run: |
+    #     echo Building MedVision.Imaging
+    #     msbuild "MedVision.Imaging\MedVision.Imaging.vcxproj" /p:Configuration=Debug /p:Platform=x64 /m
+    #
+    # - name: Build MedVision.Rendering (Debug x64)
+    #   shell: cmd
+    #   run: |
+    #     echo Building MedVision.Rendering
+    #     msbuild "MedVision.Rendering\MedVision.Rendering.vcxproj" /p:Configuration=Debug /p:Platform=x64 /m
+    #
+    # - name: Build MedVision.Viewer (Debug x64)
+    #   shell: cmd
+    #   run: |
+    #     echo Building MedVision.Viewer
+    #     msbuild "MedVision.Viewer\MedVision.Viewer.vcxproj" /p:Configuration=Debug /p:Platform=x64 /m
+    #
+    # - name: Upload viewer executable
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: medvision-viewer
+    #     path: |
+    #       bin\x64\Debug\MedVision.Viewer.exe
