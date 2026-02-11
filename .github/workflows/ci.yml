@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build MedVision.Dicom (Debug x64)
+      shell: cmd
+      run: |
+        echo Building MedVision.Dicom
+        msbuild "MedVision.Dicom\MedVision.Dicom.vcxproj" /p:Configuration=Release /p:Platform=x64 /m
+
+    - name: Build MedVision.Dicom.Tests (Release x64)
+      shell: cmd
+      run: |
+        echo Building MedVision.Dicom.Tests
+        msbuild "MedVision.Dicom.Tests\MedVision.Dicom.Tests.vcxproj" /p:Configuration=Release /p:Platform=x64 /m
+
+    - name: Run unit tests with vstest
+      shell: cmd
+      run: |
+        echo Running unit tests
+        set TEST_DLL=%GITHUB_WORKSPACE%\\bin\\x64\\Debug\\MedVision.Dicom.Tests.dll
+        if exist "%TEST_DLL%" (
+          echo Found %TEST_DLL%
+          vstest.console.exe "%TEST_DLL%" /logger:trx
+        ) else (
+          echo Test DLL not found at %TEST_DLL% && dir %GITHUB_WORKSPACE%\\bin\\x64\\Debug\\ && exit 1
+        )
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: |
+          **/*.trx
